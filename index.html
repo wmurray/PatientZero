@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="Your description goes here">
+    	<meta name="keywords" content="one, two, three">
+	
+		<title>BRAINZ!</title>
+		
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<h1>Patient Zero</h1>
+				<h2>Om Nom Nom... Brains.</h2>
+			</header> 	
+			<div id="board" class="clearfix">
+				<div class="roll">
+				</div>
+				<div class="roll">
+				</div>
+				<div class="roll">
+				</div>
+				<div id="game-info">
+					<div id="score">
+						<p id="player-one">Player 1: <span>-</span></p>
+						<p id="player-two">Player 2: <span>-</span></p>
+					</div>
+					<button class="game-action rules">Rules</button>
+				</div>
+			</div>
+			<div>
+				<p>You rolled <span id="roll-results"></span>!</p>
+			</div>
+			<div id="button-container" class="clearfix">
+				<button class="game-action feed">Feed</button>
+				<button class="game-action rest">Rest</button>
+			</div>
+			<footer>
+				<p>Based lovingly on ZombieDice by Steve Jackson, available <a href="http://www.sjgames.com/dice/zombiedice/">here</a>.</p>
+				<script src="js/script.js"></script>
+			</footer>
+		</div><!-- #container --> 
+	</body>
+</html>
