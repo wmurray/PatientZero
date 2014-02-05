@@ -21,22 +21,25 @@
 			</header> 	
 			<div id="board" class="clearfix">
 				<div class="roll">
+
 				</div>
 				<div class="roll">
+
 				</div>
 				<div class="roll">
+
 				</div>
 				<div id="game-info">
 					<div id="score">
-						<p id="player-one">Player 1: <span>-</span></p>
-						<p id="player-two">Player 2: <span>-</span></p>
+						<p class="player active-player">Player 1: <span>-</span></p>
+						<p class="player">Player 2: <span>-</span></p>
 					</div>
 					<button class="game-action rules">Rules</button>
 				</div>
 			</div>
-			<div id="rules">
+			<div id="rules-text">
 				<h2>What's the Point?</h2>
-				<p>The goal of the game is to eat as many brains as possible without getting shot in the face.</p>
+				<p>The goal of the game is to eat as many brains as possible without getting shot in the face. The first palyer to 13 brains wins.</p>
 				<h2>Cool! How Does It Work?</h2>
 				<p>Gameplay begins with Player 1. Click "Feed" button to "roll" 3 dice. The results will be one of three images:
 					<ul>
@@ -44,11 +47,9 @@
 						<li>2. Shotgun (boo!)</li>
 						<li>3. Feet (aww!)</li>
 					</ul>
+				Brain is good. Each brain scores you one point. Feet are runners - you were too slow to catch them. They have no effect on your score. Shotguns hurt. Bad. So much so that if you get them 3 times in a turn, you lose your turn and any points accumulated that turn.</p>
+				<p>You can choose to stop at any time and bank your points so you do not lose them by pressing the "Rest" button.
 
-
-			</div>
-			<div>
-				<p>You rolled <span id="roll-results"></span>!</p>
 			</div>
 			<div id="button-container" class="clearfix">
 				<button class="game-action feed">Feed</button>

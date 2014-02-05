@@ -1,5 +1,5 @@
 /* 
-Project Name: Brainz!
+Project Name: PatientZero
 Author: Will Mruray
 Developer @GA in BOS
 */
@@ -86,7 +86,7 @@ h2 {
      width: 200px;
      height: 325px;
      margin: 20px;
-     background: gray;
+     background: white;
      border-top: 4px solid black;
      border-right: 4px solid white;
      border-bottom: 4px solid white;
@@ -104,7 +104,7 @@ h2 {
 
 #score {
      width: 160px;
-     height: 160px;
+     height: 185px;
      margin-top: 20px;
      border: 1px solid #000;
      border-radius: 5px;
@@ -113,7 +113,13 @@ h2 {
 }
 
 #score p {
-     padding-top: 20px;
+     padding-top:20px;
+     padding-bottom:20px;
+}
+
+.active-player {
+     background: red;
+     color:white;
 }
 
 #roll-results {
@@ -157,6 +163,10 @@ h2 {
 
 .game-action:first-child {
      margin-left: 45px;
+}
+
+#rules-text {
+     display: none;
 }
 
 .rules {
