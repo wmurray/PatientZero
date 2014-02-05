@@ -12,38 +12,53 @@ var die = ['shotgun', 'shotgun', 'brain', 'brain', 'escape', 'escape'];
 
 var playerOneScore = 0;
 var playerTwoScore = 0;
+var results = [];
+var currentValues = [];
 
-var currentValue;
 
-// Generates random number between 0 and 5
+// Generates random number between 0 and 5 for the number of .roll
+// elements in the DOM. This acts as rolling 3 dice.
     function getRandomIndex(){
       $('.roll').each(function(){
-        return Math.floor(Math.random()*6);
-        console.log;
+        results.push(Math.floor(Math.random()*6));
       });
     };
-// Sets currentValue variable equal to a given number
+
+// Sets currentValues array equal to random values of die array based
+// on the values pulled from the results array. The values in the 
+// results array are the indexes of the die array we wish to display.
+// Calls displayImage function.
     function setValue(number){
-      currentValue = die[number];
+      currentValues.push(die[number]);
       displayImage();
     };
 
-// Displays appropriate image for given index value
-    function displayImage(){
-      $('#roll-results').text(currentValue);
-    };
+// Displays appropriate image in each .roll element of the DOM 
+// according to the currentValues array.
+  function displayImage(){
+     $('.roll').each(function(index){
+      $(this).text(currentValues[index]);
+     });
+  };
 
-// Sets result of getRandomIndex equal to val variable, passing 
+// Calls getRandomIndex.
+// Passes each value of results array into setValue function. 
 // val into setValue function.
     function rollDie(){
-       var val = getRandomIndex();
-       setValue(val);
-       console.log(currentValue);
+      getRandomIndex();
+      results.forEach(function(entry){
+        setValue(entry);
+      });
     };
 
 //click event handler for rollDie function
+//clears values of results array and currentValues array (without clearing both, array lengths get exponentially longer. Clearing only results made arrays additively larger).
    $('document').ready(function(){
-       $('.feed').on('click', rollDie); 
+       $('.feed').on('click', function(){
+        results = [];
+        currentValues = [];
+        rollDie();
+       }); 
      });
 
 
