@@ -12,51 +12,33 @@ var die = ['shotgun', 'shotgun', 'brain', 'brain', 'escape', 'escape'];
 
 var playerOneScore = 0;
 var playerTwoScore = 0;
-var results = [];
-var currentValues = [];
+
 
 
 // Generates random number between 0 and 5 for the number of .roll
 // elements in the DOM. This acts as rolling 3 dice.
-  function getRandomIndex(){
-    $('.roll').each(function(){
-      results.push(Math.floor(Math.random()*6));
-    });
-  };
-
-// Sets currentValues array equal to random values of die array based
-// on the values pulled from the results array. The values in the 
-// results array are the indexes of the die array we wish to display.
-// Calls displayImage function.
-  function setValue(number){
-    currentValues.push(die[number]);
-    displayImage();
-  };
-
-// Displays appropriate image in each .roll element of the DOM 
-// according to the currentValues array.
-  function displayImage(){
-     $('.roll').each(function(index){
-      $(this).text(currentValues[index]);
-     });
+  function rollDie(){
+      var index = Math.floor(Math.random()*die.length);
+      return die[index];
   };
 
 // Calls getRandomIndex.
 // Passes each value of results array into setValue function. 
 // val into setValue function.
-  function rollDie(){
-    getRandomIndex();
-    results.forEach(function(entry){
-      setValue(entry);
-    });
-  };
+  function feed(){
+    $('.roll').each(function(index){
+      $(this).removeClass("escape brain shotgun");
+      var roll = rollDie();
+      $(this).addClass(roll);
+      function(){
+        if $(this).hasClass('shotgun')==true{
+          $('.shotgun-count').text($(this).val()+1);
+        } else if $(this).hasClass('brain')==true{
 
-// clears values of results array and currentValues array (without 
-// clearing both, array lengths get exponentially longer. Clearing
-// only results made arrays additively larger).
-  function clearRoll(){
-    results = [];
-    currentValues = [];
+        };
+      }
+    });
+
   };
 
 // Stores the score value in the appropriate location.
@@ -68,13 +50,8 @@ var currentValues = [];
 
 // click event handler for "Feed" button and "Rest" button.
   $('document').ready(function(){
-    $('.feed').on('click', function(){
-      clearRoll();
-      rollDie();
-    }); 
-    $('.rest').on('click', function(){
-      passTurn();
-    });
+    $('.feed').on('click', feed); 
+    $('.rest').on('click', passTurn);
   });
 
 

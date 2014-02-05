@@ -98,6 +98,18 @@ h2 {
      margin-left: 45px;
 }
 
+.shotgun {
+     background-image:url('../images/shotgun.png');
+}
+
+.brain {
+     background-image:url('../images/brain.png');
+}
+
+.escape {
+     background-image:url('../images/escape.png');
+}
+
 #game-info {
      float:left;
 }
@@ -120,10 +132,6 @@ h2 {
 .active-player {
      background: red;
      color:white;
-}
-
-#roll-results {
-     display:hidden;
 }
 
 #button-container {
