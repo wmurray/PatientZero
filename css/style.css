@@ -13,9 +13,10 @@ Developer @GA in BOS
 /* Box Model Hack */
 * {
      -moz-box-sizing: border-box; /* Firexfox */
-     -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
+    -webkit-box-sizing: border-box; /* Safari/Chrome/iOS/Android */
      box-sizing: border-box; /* IE */
 }
+
 
 /* Clear fix hack */
 .clearfix:after {
@@ -86,7 +87,7 @@ h2 {
      width: 200px;
      height: 325px;
      margin: 20px;
-     background: white;
+     background: #ffcccc;
      border-top: 4px solid black;
      border-right: 4px solid white;
      border-bottom: 4px solid white;
@@ -139,27 +140,36 @@ h2 {
      margin-left: 50px;
 }
 
-#turn-stats, #death {
+.status {
      width: 680px;
      font-size: 20px;
      margin-left: 45px;
 }
 
-#turn-stats p {
-     float: left;
-     margin: 0 auto;
+.turn-stats {
+     text-align: center;
+}
+
+.turn-stats p {
+     margin: 0 auto;     
 }
 
 #brain-count {
      padding-right: 10px;
 }
 
-#death {
+.death {
+     background: black;
+     color: red;
+     border: 2px solid red;
+}
+
+.frenzy, .game-over{
      background: red;
      color: white;
 }
 
-#death p {
+.death p, .frenzy p, .game-over p {
      text-align: center;
      margin: 0 auto;
 }
@@ -187,6 +197,10 @@ h2 {
      float: left;
 }
 
+.feed-wide {
+     width: 560px;
+}
+
 .game-action:hover {
      -webkit-box-shadow: inset 0 1px 10px 1px #ff9999, 0 1px 0 #663333, 0 6px 0 #663333, 0 8px 4px 1px #333333;
      box-shadow: inset 0 1px 10px 1px #ff9999, 0 1px 0 #663333, 0 6px 0 #663333, 0 8px 4px 1px #333333;
@@ -203,7 +217,12 @@ h2 {
 }
 
 #rules-text {
-     
+   background-color: #000;
+   opacity: .7;
+   filter: alpha(opacity=70);
+   position: absolute; top: 0; left: 0;
+   width: 100%; height: 100%;
+   z-index: 10;
 }
 
 .rules {

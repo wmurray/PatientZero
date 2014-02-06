@@ -44,15 +44,21 @@
 						<li>2. Shotgun Blast (boo!)</li>
 						<li>3. Footprints (aww!)</li>
 					</ul>
-				Brains are good. Each brain scores you one point. Footprints are runners -you were too slow to catch them. They have no effect on your score. Shotguns hurt. Bad. So much so that if you get shot 3 times in a turn, you lose your turn and any points accumulated during that turn.</p>
-				<p>You can choose to stop at any time and bank your points so you do not lose them by pressing the "Rest" button.
+				Brains are good. Each brain scores you one point. Footprints are runners -you were too slow to catch them. They have no effect on your score. Shotguns hurt. Bad. So much so that if you get shot 3 times in a turn, you lose your turn and any points accumulated during that turn. You can choose to stop at any time and bank your points so you do not lose them by pressing the "Rest" button.</p>
+				<p>Once a player reaches 13 or more brains, the opposing player will go into a Feeding Frenzy. During a Feeding Frenzy, the player rolls until either scoring higher than the leading player (this securing the victory!) or until dead.</p>
 			</div>
-			<div id="turn-stats" class="clearfix">
-				<p>Brains: <span id="brain-count">0</span></p>
-				<p>Shotguns: <span id="shotgun-count">0</span></p>
+			<div class="status turn-stats clearfix">
+				<p>Brains: <span id="brain-count">0</span>   Shotguns: <span id="shotgun-count">0</span></p>
 			</div>
-			<div id="death" class="hidden">
+			<div class="status death hidden">
 				<p>SHOTGUNNED! NEXT PLAYER!</p>
+			</div>
+			<div class="status frenzy hidden">
+				<p>FEEDING FRENZY!</p>
+			</div>
+			<div class="status game-over hidden">
+				<p>GAME OVER</p>
+				<p><span class="winner"></span> WINS!</p>
 			</div>
 			<div id="button-container" class="clearfix">
 				<button class="game-action feed">Feed</button>

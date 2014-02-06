@@ -29,37 +29,62 @@ var brainCount = 0;
 // Adding to shotgun/brain count as needed and ending turn 
 // when 3 shotguns are rolled.
   function feed(){
-    $('#death').addClass('hidden');
-    $('#turn-stats').removeClass('hidden');
+    $('.death').addClass('hidden');
+    $('.turn-stats').removeClass('hidden');
     $('.roll').each(function(index){
       $(this).removeClass("escape brain shotgun");
       var roll = rollDie();
       $(this).addClass(roll);
-        if($(this).hasClass('shotgun') == true && shotgunCount < 2) {
+        if(roll == 'shotgun' && shotgunCount < 2) {
           shotgunCount+=1;
           $('#shotgun-count').text(shotgunCount);
-        } else if ($(this).hasClass('shotgun') == true && shotgunCount == 2) {
+        } else if (roll == 'shotgun' && shotgunCount == 2) {
           shotInHead();
-        } else if ($(this).hasClass('brain') == true) {
+        } else if (roll == 'brain') {
           brainCount+=1;
           $('#brain-count').text(brainCount);
         };
     });
   };
 
+// Same as above, but the end of this turn is the end of the game.
+  function frenziedFeed(){
+    $('.roll').each(function(index){
+      $(this).removeClass("escape brain shotgun");
+      var roll = rollDie();
+      $(this).addClass(roll);
+        if(roll == 'shotgun' && shotgunCount < 2) {
+          shotgunCount+=1;
+          $('#shotgun-count').text(shotgunCount);
+        } else if (roll == 'shotgun' && shotgunCount == 2) {
+          lastShot();
+        } else if (roll == 'brain') {
+          brainCount+=1;
+          $('#brain-count').text(brainCount);
+          tallyScore();
+          checkScore();
+        };
+    });
+  };
+
 // Stores the score value in the appropriate location.
-// Selects next player. 
-  function passTurn(){
-    // Add brain count to appropriate player score.
-    if($('.active-player').has('span#player-one-score')){
+  function tallyScore(){
+      if ($('.active-player').has('span#player-one-score').length > 0) {
       playerOneScore = playerOneScore + brainCount;
       $('#player-one-score').text(playerOneScore);
     } else {
       playerTwoScore = playerTwoScore + brainCount;
       $('#player-two-score').text(playerTwoScore);
     };
-    $('.player').toggleClass("active-player");
+  };
+
+// Selects next player. 
+// Resets turn-stats.
+// Runs checkScore to determine if it is last turn (feeding frenzy).
+  function passTurn(){
+    tallyScore();
     resetCounts();
+    checkScore();
   };
 
 
@@ -76,10 +101,22 @@ var brainCount = 0;
 // Displays "SHOTGUNNED" dialogue.
 // Hides turn-stats dialogue.
   function shotInHead(){
-    $('#turn-stats').addClass('hidden');
-    $('#death').removeClass('hidden');
+    $('.turn-stats').addClass('hidden');
+    $('.death').removeClass('hidden');
     $('.player').toggleClass("active-player");
     resetCounts();
+  };
+
+  function lastShot(){
+    $('.frenzy .turn-stats').addClass('hidden');
+    $('.game-over').removeClass('hidden');
+    if(playerOneScore > playerTwoScore){
+      $('.winner').text('Player 1');
+    } else {
+      $('.winner').text('Player 2');
+    };
+    resetCounts();
+    $('feed-wide').text('New Game').addClass('new-game');
   };
 
 // Rules pop-up/overlay. Will contain the rules-text div.
@@ -90,11 +127,33 @@ var brainCount = 0;
 // Or until death.
 // If other player succeeds, they win/game ends.
 // If fail, original player still winner/game ends.
+function checkScore() {
+  if (playerOneScore >= 6 || playerTwoScore >= 6) {
+    $('.frenzy').removeClass('hidden');
+    $('.turn-stats').addClass('frenzy');
+    $('.rest').addClass('hidden');
+    $('.feed').addClass('feed-wide').removeClass('feed');
+    $('.player').toggleClass("active-player");
+  } else if (playerOneScore >= 6 && playerTwoScore >= 6 && playerOneScore >= playerTwoScore && $('.active-player').has('span#player-one-score').length > 0) {
+      $('.frenzy .turn-stats').addClass('hidden');
+      $('.game-over').removeClass('hidden');
+      $('.winner').text('Player 1');
+  } else if (playerOneScore >= 6 && playerTwoScore >= 6 && playerOneScore <= playerTwoScore && $('.active-player').has('span#player-two-score').length > 0) {
+      $('.frenzy .turn-stats').addClass('hidden');
+      $('.game-over').removeClass('hidden');
+      $('.winner').text('Player 1');
+  } else {
+    $('.player').toggleClass("active-player");
+  };
+};
 
-// click event handler for "Feed" button and "Rest" button.
+// click event handler for "Feed" button, "Rest" button, "Rules" 
+// button, and "New Game" button.
   $('document').ready(function(){
-    $('.feed').on('click', feed); 
+    $('.feed').on('click', feed);
+    $('.feed-wide').on('click', frenziedFeed);
     $('.rest').on('click', passTurn);
+    
   });
 
 
