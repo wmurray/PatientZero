@@ -29,18 +29,20 @@ var brainCount = 0;
 // Adding to shotgun/brain count as needed and ending turn 
 // when 3 shotguns are rolled.
   function feed(){
+    $('#death').addClass('hidden');
+    $('#turn-stats').removeClass('hidden');
     $('.roll').each(function(index){
       $(this).removeClass("escape brain shotgun");
       var roll = rollDie();
       $(this).addClass(roll);
         if($(this).hasClass('shotgun') == true && shotgunCount < 2) {
           shotgunCount+=1;
-          $('.shotgun-count').text(shotgunCount);
-        } else if ($(this).hasClass('shotgun') == true && shotgunCount = 2) {
+          $('#shotgun-count').text(shotgunCount);
+        } else if ($(this).hasClass('shotgun') == true && shotgunCount == 2) {
           shotInHead();
         } else if ($(this).hasClass('brain') == true) {
           brainCount+=1;
-          $('.brain-count').text(brainCount);
+          $('#brain-count').text(brainCount);
         };
     });
   };
