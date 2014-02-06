@@ -68,8 +68,8 @@ var brainCount = 0;
   function resetCounts(){
     shotgunCount=0;
     brainCount=0;
-    $('.shotgun-count').text(shotgunCount);
-    $('.brain-count').text(brainCount);
+    $('#shotgun-count').text(shotgunCount);
+    $('#brain-count').text(brainCount);
   };
 
 // End turn due to sudden death.
