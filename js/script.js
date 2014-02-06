@@ -84,6 +84,7 @@ var brainCount = 0;
   function passTurn(){
     tallyScore();
     resetCounts();
+    $('.player').toggleClass("active-player");
     checkScore();
   };
 
@@ -121,19 +122,16 @@ var brainCount = 0;
 
 // Rules pop-up/overlay. Will contain the rules-text div.
 
-// End of Game.
-// Needs to check player score variable when passTurn runs.
-// If score is >= 13, other player has chance to roll until score > first winner
-// Or until death.
-// If other player succeeds, they win/game ends.
-// If fail, original player still winner/game ends.
+// Checks players score and sets game into appropriate state.
+// When a player breaks the 13 brain threshold, sets other player to frenzied.
+// If a player is frenzied and outscores the player that broke the threshold, 
+// shows victory state for that player.
 function checkScore() {
   if (playerOneScore >= 6 || playerTwoScore >= 6) {
     $('.frenzy').removeClass('hidden');
     $('.turn-stats').addClass('frenzy');
     $('.rest').addClass('hidden');
-    $('.feed').addClass('feed-wide').removeClass('feed');
-    $('.player').toggleClass("active-player");
+    $('.feed').addClass('feed-wide');
   } else if (playerOneScore >= 6 && playerTwoScore >= 6 && playerOneScore >= playerTwoScore && $('.active-player').has('span#player-one-score').length > 0) {
       $('.frenzy .turn-stats').addClass('hidden');
       $('.game-over').removeClass('hidden');
@@ -150,8 +148,13 @@ function checkScore() {
 // click event handler for "Feed" button, "Rest" button, "Rules" 
 // button, and "New Game" button.
   $('document').ready(function(){
-    $('.feed').on('click', feed);
-    $('.feed-wide').on('click', frenziedFeed);
+    $('.feed').on('click', function(){
+      if($(this).hasClass('feed-wide')) {
+          frenziedFeed.call(this);
+      } else {
+        feed.call(this);
+      }
+    });
     $('.rest').on('click', passTurn);
     
   });
