@@ -146,9 +146,12 @@ h2 {
 }
 
 #turn-stats p {
-     padding-left: 10px;
      float: left;
      margin: 0 auto;
+}
+
+#brain-count {
+     padding-right: 10px;
 }
 
 #death {
@@ -158,6 +161,7 @@ h2 {
 
 #death p {
      text-align: center;
+     margin: 0 auto;
 }
 
 .hidden {
