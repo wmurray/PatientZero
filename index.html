@@ -21,23 +21,20 @@
 			</header> 	
 			<div id="board" class="clearfix">
 				<div class="roll">
-
 				</div>
 				<div class="roll">
-
 				</div>
 				<div class="roll">
-
 				</div>
 				<div id="game-info">
 					<div id="score">
-						<p class="player active-player">Player 1: <span>-</span></p>
-						<p class="player">Player 2: <span>-</span></p>
+						<p class="player active-player">Player 1: <span id="player-one-score">0</span></p>
+						<p class="player">Player 2: <span id="player-two-score">0</span></p>
 					</div>
 					<button class="game-action rules">Rules</button>
 				</div>
 			</div>
-			<div id="rules-text">
+			<div id="rules-text" class="hidden">
 				<h2>What's the Point?</h2>
 				<p>The goal of the game is to eat as many brains as possible without getting shot in the face. The first player to 13 brains wins.</p>
 				<h2>Cool! How Does It Work?</h2>
@@ -47,12 +44,15 @@
 						<li>2. Shotgun (boo!)</li>
 						<li>3. Feet (aww!)</li>
 					</ul>
-				Brain is good. Each brain scores you one point. Feet are runners - you were too slow to catch them. They have no effect on your score. Shotguns hurt. Bad. So much so that if you get them 3 times in a turn, you lose your turn and any points accumulated that turn.</p>
+				Brains are good. Each brain scores you one point. Feet are runners - you were too slow to catch them. They have no effect on your score. Shotguns hurt. Bad. So much so that if you get them 3 times in a turn, you lose your turn and any points accumulated that turn.</p>
 				<p>You can choose to stop at any time and bank your points so you do not lose them by pressing the "Rest" button.
-
 			</div>
-			<div>
+			<div id="turn-stats" class="clearfix">
 				<p>Shotguns: <span id="shotgun-count">0</span></p>
+				<p>Brains: <span id="brain-count">0</span></p>
+			</div>
+			<div id="death" class="hidden">
+				<p>SHOTGUNNED! NEXT PLAYER!</p>
 			</div>
 			<div id="button-container" class="clearfix">
 				<button class="game-action feed">Feed</button>

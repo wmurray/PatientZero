@@ -139,6 +139,31 @@ h2 {
      margin-left: 50px;
 }
 
+#turn-stats, #death {
+     width: 680px;
+     font-size: 20px;
+     margin-left: 45px;
+}
+
+#turn-stats p {
+     padding-left: 10px;
+     float: left;
+     margin: 0 auto;
+}
+
+#death {
+     background: red;
+     color: white;
+}
+
+#death p {
+     text-align: center;
+}
+
+.hidden {
+     display: none;
+}
+
 .game-action {
      width: 260px;
      height: 80px;
@@ -174,7 +199,7 @@ h2 {
 }
 
 #rules-text {
-     display: none;
+     
 }
 
 .rules {
@@ -187,5 +212,7 @@ h2 {
 footer {
      font-size: 12px;
      text-align: center;
-     margin-top: 60px;
+     padding-top: 20px;
+     margin-top: 100px;
+     border-top: 2px solid #ff0000;
 }
