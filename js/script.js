@@ -61,7 +61,6 @@ var brainCount = 0;
         } else if (roll == 'brain') {
           brainCount+=1;
           $('#brain-count').text(brainCount);
-          tallyScore();
           checkScore();
         };
     });
@@ -109,7 +108,7 @@ var brainCount = 0;
   };
 
   function lastShot(){
-    $('.frenzy .turn-stats').addClass('hidden');
+    $('.frenzy, .turn-stats').addClass('hidden');
     $('.game-over').removeClass('hidden');
     if(playerOneScore > playerTwoScore){
       $('.winner').text('Player 1');
@@ -118,7 +117,7 @@ var brainCount = 0;
     };
     resetCounts();
     $('.feed-wide').addClass('new-game');
-    $('feed-wide').text('New Game');
+    $('.feed-wide').text('New Game');
   };
 
 // Rules pop-up/overlay. Will contain the rules-text div.
@@ -128,49 +127,61 @@ var brainCount = 0;
 // If a player is frenzied and outscores the player that broke the threshold, 
 // shows victory state for that player.
 function checkScore() {
-  if (playerOneScore >= 6 || playerTwoScore >= 6) {
+  if (playerOneScore >= 13 || playerTwoScore >= 13) {
     $('.frenzy').removeClass('hidden');
     $('.turn-stats').addClass('frenzy');
     $('.rest').addClass('hidden');
     $('.feed').addClass('feed-wide');
-  } else if (playerOneScore >= 6 && playerTwoScore >= 6 && playerOneScore >= playerTwoScore && $('.active-player').has('span#player-one-score').length > 0) {
-      $('.frenzy .turn-stats').addClass('hidden');
+  } else if (playerOneScore >= 13 && playerTwoScore >= 13 && (playerOneScore + brainCount) >= playerTwoScore && $('.active-player').has('span#player-one-score').length > 0) {
+      $('.frenzy, .turn-stats').addClass('hidden');
       $('.game-over').removeClass('hidden');
       $('.winner').text('Player 1');
       $('.feed-wide').addClass('new-game');
       $('feed-wide').text('New Game');
-  } else if (playerOneScore >= 6 && playerTwoScore >= 6 && playerOneScore <= playerTwoScore && $('.active-player').has('span#player-two-score').length > 0) {
-      $('.frenzy .turn-stats').addClass('hidden');
+      tallyScore();
+  } else if (playerOneScore >= 13 && playerTwoScore >= 13 && playerOneScore <= (playerTwoScore + brainCount) && $('.active-player').has('span#player-two-score').length > 0) {
+      $('.frenzy, .turn-stats').addClass('hidden');
       $('.game-over').removeClass('hidden');
-      $('.winner').text('Player 1');
+      $('.winner').text('Player 2');
       $('.feed-wide').addClass('new-game');
       $('feed-wide').text('New Game');
+      tallyScore();
   };
 
 };
 
 // New Game function. 
-// Resets all things to default
+// Resets all things to default.
 function newGame(){
-  $('.status .feed').addClass('hidden');
-  $('.turn-stats').removeClass('hidden');
-  $('.feed').removeClass('feed-wide');
+  $('.turn-stats, .rest').removeClass('hidden frenzy');
+  $('.roll').removeClass('escape brain shotgun');
+  $('.game-over, .frenzy').addClass('hidden');  
+  $('.feed').removeClass('feed-wide new-game');
+  $('.feed').text('Feed');
+  resetCounts();
+  playerOneScore = 0;
+  playerTwoScore = 0;
+  $('#player-one-score').text(playerOneScore);
+  $('#player-two-score').text(playerTwoScore);
+
 };
 
 // click event handler for "Feed" button, "Rest" button, "Rules" 
 // button, and "New Game" button.
   $('document').ready(function(){
     $('.feed').on('click', function(){
-      if($(this).hasClass('feed-wide')) {
+      if($(this).hasClass('feed-wide') && !$(this).hasClass('new-game')) {
           frenziedFeed.call(this);
       } else if ($(this).hasClass('new-game')) {
           newGame.call(this);
       } else {
           feed.call(this);
-      }
+      };
     });
     $('.rest').on('click', passTurn);
-    
+    $('.rules').on('click', function(){
+      $('#rules-text').toggleClass('hidden');
+    });
   });
 
 
