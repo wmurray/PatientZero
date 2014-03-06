@@ -35,10 +35,10 @@ var brainCount = 0;
       $(this).removeClass("escape brain shotgun");
       var roll = rollDie();
       $(this).addClass(roll);
-        if(roll == 'shotgun' && shotgunCount < 2) {
+        if(roll == 'shotgun' && shotgunCount < 2){
           shotgunCount+=1;
           $('#shotgun-count').text(shotgunCount);
-        } else if (roll == 'shotgun' && shotgunCount == 2) {
+        } else if (roll == 'shotgun' && shotgunCount == 2){
           shotInHead();
         } else if (roll == 'brain') {
           brainCount+=1;
@@ -53,14 +53,21 @@ var brainCount = 0;
       $(this).removeClass("escape brain shotgun");
       var roll = rollDie();
       $(this).addClass(roll);
-        if(roll == 'shotgun' && shotgunCount < 2) {
+        if(roll == 'shotgun' && shotgunCount < 2){
           shotgunCount+=1;
           $('#shotgun-count').text(shotgunCount);
-        } else if (roll == 'shotgun' && shotgunCount == 2) {
+        } else if (roll == 'shotgun' && shotgunCount == 2){
           lastShot();
         } else if (roll == 'brain') {
-          brainCount+=1;
-          $('#brain-count').text(brainCount);
+          if ($('.active-player').has('span#player-one-score').length > 0){
+            $('#player-one-score').text(playerOneScore+=1);
+            brainCount+=1;
+            $('#brain-count').text(brainCount);
+          } else {
+            $('#player-two-score').text(playerTwoScore+=1);
+            brainCount+=1;
+            $('#brain-count').text(brainCount);
+          };
           checkScore();
         };
     });
@@ -68,7 +75,7 @@ var brainCount = 0;
 
 // Stores the score value in the appropriate location.
   function tallyScore(){
-      if ($('.active-player').has('span#player-one-score').length > 0) {
+      if ($('.active-player').has('span#player-one-score').length > 0){
       playerOneScore = playerOneScore + brainCount;
       $('#player-one-score').text(playerOneScore);
     } else {
@@ -127,25 +134,23 @@ var brainCount = 0;
 // If a player is frenzied and outscores the player that broke the threshold, 
 // shows victory state for that player.
 function checkScore() {
-  if (playerOneScore >= 13 || playerTwoScore >= 13) {
+  if (playerOneScore >= 13 && playerTwoScore < 13 || playerOneScore < 13 && playerTwoScore >= 13) {
     $('.frenzy').removeClass('hidden');
     $('.turn-stats').addClass('frenzy');
     $('.rest').addClass('hidden');
     $('.feed').addClass('feed-wide');
-  } else if (playerOneScore >= 13 && playerTwoScore >= 13 && (playerOneScore + brainCount) >= playerTwoScore && $('.active-player').has('span#player-one-score').length > 0) {
+  } else if (playerOneScore >= 13 && playerTwoScore >= 13 && playerOneScore > playerTwoScore && $('.active-player').has('span#player-one-score').length > 0){
       $('.frenzy, .turn-stats').addClass('hidden');
       $('.game-over').removeClass('hidden');
       $('.winner').text('Player 1');
       $('.feed-wide').addClass('new-game');
-      $('feed-wide').text('New Game');
-      tallyScore();
-  } else if (playerOneScore >= 13 && playerTwoScore >= 13 && playerOneScore <= (playerTwoScore + brainCount) && $('.active-player').has('span#player-two-score').length > 0) {
+      $('.feed-wide').text('New Game');
+  } else if (playerOneScore >= 13 && playerTwoScore >= 13 && playerOneScore < playerTwoScore && $('.active-player').has('span#player-two-score').length > 0){
       $('.frenzy, .turn-stats').addClass('hidden');
       $('.game-over').removeClass('hidden');
       $('.winner').text('Player 2');
       $('.feed-wide').addClass('new-game');
-      $('feed-wide').text('New Game');
-      tallyScore();
+      $('.feed-wide').text('New Game');
   };
 
 };
@@ -163,16 +168,15 @@ function newGame(){
   playerTwoScore = 0;
   $('#player-one-score').text(playerOneScore);
   $('#player-two-score').text(playerTwoScore);
-
 };
 
 // click event handler for "Feed" button, "Rest" button, "Rules" 
 // button, and "New Game" button.
   $('document').ready(function(){
     $('.feed').on('click', function(){
-      if($(this).hasClass('feed-wide') && !$(this).hasClass('new-game')) {
+      if($(this).hasClass('feed-wide') && !$(this).hasClass('new-game')){
           frenziedFeed.call(this);
-      } else if ($(this).hasClass('new-game')) {
+      } else if ($(this).hasClass('new-game')){
           newGame.call(this);
       } else {
           feed.call(this);
