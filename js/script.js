@@ -187,6 +187,3 @@ function newGame(){
       $('#rules-text').toggleClass('hidden');
     });
   });
-
-
-    
