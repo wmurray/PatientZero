@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="Your description goes here">
+    	<meta name="keywords" content="one, two, three">
+	
+		<title>BRAINZ!</title>
+		
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<header>
+				<h1>Patient Zero</h1>
+				<h2>Om Nom Nom... Brains.</h2>
+			</header> 	
+				<div id="rules-text" class="rules-text hidden">
+					<h2>What's the Point?</h2>
+					<p>The goal of the game is to eat as many brains as possible without getting shot in the face. The first player to 13 (or more) brains wins.</p>
+					<h2>Cool! How Does It Work?</h2>
+					<p>Gameplay begins with Player 1. Click "Feed" button to "roll" 3 dice. The results will be one of three images:
+						<ul>
+							<li>1. Brain (yay!)</li>
+							<li>2. Shotgun Blast (boo!)</li>
+							<li>3. Footprints (damn!)</li>
+						</ul>
+					Brains are good. Each brain scores you one point. Footprints are runners -you were too slow to catch them. They have no effect on your score. Shotguns hurt. Bad. So much so that if you get shot 3 times in a turn, you lose your turn and any brains accumulated during that turn. You can choose to stop at any time and bank your points so you do not lose them by pressing the "Rest" button.</p>
+					<p>Once a player reaches 13 or more brains, the opposing player will go into a Feeding Frenzy. During a Feeding Frenzy, the player rolls until either scoring higher than the leading player (thus securing victory!) or until dead.</p>
+			</div>
+			<div id="board" class="clearfix">
+				<div class="roll">
+				</div>
+				<div class="roll">
+				</div>
+				<div class="roll">
+				</div>
+				<div id="game-info">
+					<div id="score">
+						<p class="player active-player">Player 1: <span id="player-one-score">0</span></p>
+						<p class="player">Player 2: <span id="player-two-score">0</span></p>
+					</div>
+					<button class="game-action rules">Rules</button>
+				</div>
+			</div>
+			<div class="status turn-stats clearfix">
+				<p>Brains: <span id="brain-count">0</span>   Shotguns: <span id="shotgun-count">0</span></p>
+			</div>
+			<div class="status death hidden">
+				<p>SHOTGUNNED! NEXT PLAYER!</p>
+			</div>
+			<div class="status frenzy hidden">
+				<p>FEEDING FRENZY!</p>
+			</div>
+			<div class="status game-over hidden">
+				<p>GAME OVER</p>
+				<p><span class="winner"></span> WINS!</p>
+			</div>
+			<div id="button-container" class="clearfix">
+				<button class="game-action feed">Feed</button>
+				<button class="game-action rest">Rest</button>
+			</div>
+			<footer>
+				<p>Based lovingly on ZombieDice by Steve Jackson, available <a href="http://www.sjgames.com/dice/zombiedice/">here</a>.</p>
+				<script src="js/script.js"></script>
+			</footer>
+		</div><!-- #container --> 
+	</body>
+</html>
